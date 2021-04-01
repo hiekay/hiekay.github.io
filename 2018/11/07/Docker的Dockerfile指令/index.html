@@ -1,0 +1,134 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="Recoding my grow of technology"><title>Docker的Dockerfile指令 | hiekay's blog</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=1.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/8.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Docker的Dockerfile指令</h1><a id="logo" href="/.">hiekay's blog</a><p class="description">分享技术的阳光地带</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/timeline/"><i class="fa fa-history"> 历史</i></a><a href="/book/"><i class="fa fa-book"> book</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">Docker的Dockerfile指令</h1><div class="post-meta">Nov 7, 2018<span> | </span><span class="category"><a href="/categories/docker/">docker</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span><span class="post-time"><span class="post-meta-item-text"> | </span><span class="post-meta-item-icon"><i class="fa fa-keyboard-o"></i><span class="post-count"> 1,062</span><span class="post-meta-item-text"> 字</span></span></span><span class="post-time"> | <span class="post-meta-item-icon"><i class="fa fa-hourglass-half"></i><span class="post-count"> 5</span><span class="post-meta-item-text"> 分钟</span></span></span></div><a class="disqus-comment-count" href="/2018/11/07/Docker的Dockerfile指令/#vcomment"><span class="valine-comment-count" data-xid="/2018/11/07/Docker的Dockerfile指令/"></span><span> 条评论</span></a><div class="clear"><div class="toc-article" id="toc"><div class="toc-title">文章目录</div><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Dockerfile指令"><span class="toc-number">1.</span> <span class="toc-text">Dockerfile指令</span></a></li></ol></div></div><div class="post-content"><h4 id="Dockerfile指令"><a href="#Dockerfile指令" class="headerlink" title="Dockerfile指令"></a>Dockerfile指令</h4><ul>
+<li><p>(1) CMD<br>用于指定一个容器启动时要运行的命令.<br>类似RUN</p>
+<ul>
+<li><p>指定要运行的特定命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run -i -t hiekay/static_web /bin/true</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用CMD</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CMD [&quot;/bin/true&quot;]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>给CMD指令传递参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CMD [&quot;/bin/bash&quot;, &quot;-l&quot;]</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p>将-l 标志传递给/bin/bash命令.<br>docker run  命令可以覆盖CMD命令</p>
+<ul>
+<li>(2) ENTRYPOINT<br>ENTRYPOINT 和CMD命令类似,但是不容易在启动的时候被覆盖.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ENTRYPOINT [&quot;/usr/sbin/nginx&quot;]</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>指定参数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ENTRYPOINT [&quot;/usr/sbin/nginx&quot;, &quot;-g&quot;, &quot;daemon off;&quot; ]</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>(3) WORKDIR<br>WORKDIR指令用来在从镜像创建一个新容器时,在容器内部设置一个工作目录,ENTRYPOINT或者CMD指定的程序会在这个目录下执行.<br>如 使用WORKDIR命令<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">WORKDIR /opt/webapp/db</span><br><span class="line">RUN bundle install</span><br><span class="line">WORKDIR /opt/webapp</span><br><span class="line">ENTRYPOINT [&quot;rackup&quot;]</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>我们将目录切换为/opt/webapp/db 后运行bundle install , 之后将目录切换为/opt/webapp,最后设置ENTRYPOINT指令来启动rackup命令.</p>
+<p> 可以通过-w标志在运行时候覆盖工作目录</p>
+<ul>
+<li>覆盖工作目录<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run -ti -w /var/log ubuntu pwd</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>该命令会将容器内的工作目录设置为/var/log . </p>
+<ul>
+<li>(4) ENV<br>ENV指令用来在镜像构建过程中设置环境变量.</li>
+<li><p>在Dockerfile文件中设置环境变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ENV RVM_PATH /home/rvm/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>为RUN指令设置前缀</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RUN gem install unicorn</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加ENV 前缀后执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RVM_PATH=/home/rvm/ gem install unicorn</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在其他Dockerfile指令中使用环境变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ENV TARGET_DIR /opt/app</span><br><span class="line">WORKDIR $TARGET_DIR</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>在这里我们设定了一个新的环境变量TARGET_DIR, 并在WORKDIR中使用了它的值,因此实际上WORKDIR指令的值会被设置为/opt/app  </p>
+<ul>
+<li><p>(5) USER<br>USER 指令用来指定该镜像会以什么用户去运行.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">USER nginx</span><br></pre></td></tr></table></figure>
+<ul>
+<li>指定USER和GROUP的各种组合<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">USER user</span><br><span class="line">USER user:group</span><br><span class="line">USER uid</span><br><span class="line">USER uid:gid</span><br><span class="line">USER user:gid</span><br><span class="line">USER uid:group</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p>也可以在docker run 命令通过-u选项覆盖该指令的值.</p>
+<ul>
+<li>(6) VOLUME<br>VOLUME指令用来向基于镜像创建的容器添加卷.<ul>
+<li>使用VOLUME指令<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VOLUME [&quot;/opt/project&quot;]</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p>这个指令会为基于此镜像创建的任何容器创建一个名为 /opt/project 的挂载点.</p>
+<ul>
+<li>使用VOLUME指令指定多个卷<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VOLUME [&quot;/opt/project&quot;, &quot;/data&quot; ]</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>(7)ADD<br>ADD指令用来将构建环境下的文件和目录复制到镜像中.<br>如:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ADD software.lic /opt/application/software.lic</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>解析:ADD指令将会将构建目录下的software.lic文件复制到镜像中的/opt/application/software.lic </p>
+<ul>
+<li>在ADD指令中使用URL作为文件源<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ADD http://wordpress.org/latest.zip /root/wordpress.zip</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>将归档文件作为ADD指令中的源文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ADD latest.tar.gz /var/www/wordpress</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>会自动解压到目录下.</p>
+<ul>
+<li>(8)COPY<br>COPY指令非常类似ADD 不同是COPY只关心在构建上下文中复制本地文件,而不会去做文件提取和解压.</li>
+<li>使用COPY指令<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">COPY conf.d /etc/apache2</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>将 本地 conf.d目录中的文件复制到/etc/apache2目录中.</p>
+<ul>
+<li>(9) ONBUILD<br>ONBUILD 指令能为镜像添加触发器.当一个镜像被用做其他镜像的基础镜像时,该镜像中的触发器将会被执行.</li>
+<li><p>添加ONBUILD指令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ONBUILD ADD . /app/src</span><br><span class="line">ONBUILD RUN cd /app/src &amp;&amp; make</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>通过docker inspect 命令查看镜像中的ONBUILD命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker inspect ID</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新的ONBUILD镜像Dockerfile</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#Version: 0.0.1</span><br><span class="line">FROM ubuntu:18.04</span><br><span class="line">MAINTAINER hiekay &quot;hikay5230@gmail.com&quot;</span><br><span class="line">RUN apt-get update</span><br><span class="line">RUN apt-get install -y apache2</span><br><span class="line">ENV APACHE_RUN_USER www-data</span><br><span class="line">ENV APACHE_RUN_GROUP www-data</span><br><span class="line">ENV APACHE_LOG_DIR /var/log/apche2</span><br><span class="line">ONBUILD ADD . /var/www/</span><br><span class="line">EXPOSE 80</span><br><span class="line">ENTRYPOINT [&quot;/usr/sbin/apache2&quot;]</span><br><span class="line">CMD [&quot;-D&quot;, &quot;FOREGROUND&quot;]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>构建apche2镜像<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker build -t=&quot;hiekay/apache2&quot; .</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p>解析:在新构建的镜像中包含一条ONBUILD指令, 该指令将构建环境所在的目录下的内容全部添加到镜像中的/var/www/目录小.我们将这个Dockerfile 作为一个通用的Web应用程序的模板,可以基于这个模板来构建Web应用程序.</p>
+<ul>
+<li><p>构建webapp的Dockerfile</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">FROM hiekay/apache2</span><br><span class="line">MAINTAINER hiekay &quot;hikay5230@gmail.com&quot;</span><br><span class="line">ENV APPLICATION_NAME webapp</span><br><span class="line">ENV ENVIRONMENT development</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>构建webapp镜像</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker build -t=&quot;hiekay/webapp&quot; .</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这个构建过程就会基于hiekay/apache2镜像,就会执行ADD指令.  因为ADD 指令就是在ONBUILD 触发器中指定的.</p>
+</div><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong>hiekay</li><li class="post-copyright-link"><strong>本文链接：</strong><a href="/2018/11/07/Docker的Dockerfile指令/">https://hiekay.github.io/2018/11/07/Docker的Dockerfile指令/</a></li><li class="post-copyright-license"><strong>版权声明：</strong>作者拥有版权，请注明出处转载。</li></ul></div><br><script type="text/javascript" src="/js/share.js?v=1.0.0" async></script><a class="article-share-link" data-url="https://hiekay.github.io/2018/11/07/Docker的Dockerfile指令/" data-id="cjo7bcuht0000vcvm1qr36viy" data-qrcode="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACMUlEQVR42u3aQY6DMAwF0N7/0p1tpQr6bcNIJC+riikhj5HcOPbrFY/31/i8fvSdz79+z3b+lNcdAwMD47GM9+nIl3h05Wie/DVFLwgDA2MDxnlYzD+fLyK/K18bBgYGRnUzl4fO6ivDwMDAqAbcPJWdJ8YYGBgYeRKbMJKENr/3llwcAwPjgYz81P3/P99S38DAwHgU410cyb3VDeIFq8LAwFiakQe4Hm8yQ74eDAyMfRiTMWnwylsxLo7TGBgYj2Xk080LANce+WFgYOzDqAa76jaxN38z98XAwFiCUS0l9nZiyfHcZd0iGBgYizJ6TRXzlojqFvBwNgwMjKUZ1VQzp/ZKm72gj4GBsQNjkmRONpGT7emPSiwGBsZCjMkDqkdj+bOSJDaqbGBgYCzB6DVhVLeM+YJ6W0YMDIx9GPl059fzY7ge+0fYxcDAWI5RDaPV71QP2gq/Bp/zY2BgLM3oJaL5EufNHM0aJQYGxgaMSdGxmivnBdHC/BgYGMsxes2p1XB5PkN+uHY4AwYGxgaMamKZ31VtQs2P55oLwsDAWIJxX420sKxqmwUGBsaijHdxTAqW87Q5+j9gYGAsx6gWC+eFgQSZpKy9kicGBsZzGdWksRp8e60b5UYQDAyMDRjV1orzV3Dftu8QiYGBgdEKstX0NS88/Iq+GBgYGP2j//OSZ57WXvy7gYGB8RBGdZOXB9k8EOfnghgYGLsx8tQxCb75A/KjtMnhHQYGxsMZf7ikapjhs6VGAAAAAElFTkSuQmCC">分享</a><div class="tags"><a href="/tags/Dockerfile/">Dockerfile</a><a href="/tags/docker/">docker</a></div><div class="post-nav"><a class="pre" href="/2018/11/07/使用Docker测试静态网站/">使用Docker测试静态网站</a><a class="next" href="/2018/11/07/构建docker镜像/">构建docker镜像</a></div><div id="vcomment"></div><script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'YEVlIen4FFaIj8U4r9JJhvN4-gzGzoHsz## Your LeanCloud application App ID, e.g. pRBBL2JR4N7kLEGojrF0MsSs-gzGzoHsz',
+  appKey:'BpDtyTCkTLmYsf4jTby7aBxv## Your LeanCloud application App Key, e.g. tjczHpDfhjYDSYddzymYK1JJ',
+  placeholder:'说出你的高见！',
+  avatar:'mm',
+  guest_info:guest_info,
+  pageSize:'10'
+})</script></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="https://hiekay.github.io"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/elasticsearch/">elasticsearch</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/git/">git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tools/">tools</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ubuntu/">ubuntu</a><span class="category-list-count">3</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/hexo优化/" style="font-size: 15px;">hexo优化</a> <a href="/tags/Dockerfile/" style="font-size: 15px;">Dockerfile</a> <a href="/tags/Docker入门/" style="font-size: 15px;">Docker入门</a> <a href="/tags/github-博客/" style="font-size: 15px;">github 博客</a> <a href="/tags/hexo-设置关于、标签、分类、归档、时间线/" style="font-size: 15px;">hexo 设置关于、标签、分类、归档、时间线</a> <a href="/tags/hexo-设置关于/" style="font-size: 15px;">hexo 设置关于</a> <a href="/tags/hexo-设置标签/" style="font-size: 15px;">hexo 设置标签</a> <a href="/tags/hexo-设置分类/" style="font-size: 15px;">hexo 设置分类</a> <a href="/tags/hexo-设置归档/" style="font-size: 15px;">hexo 设置归档</a> <a href="/tags/hexo-设置时间线/" style="font-size: 15px;">hexo 设置时间线</a> <a href="/tags/hexo插件/" style="font-size: 15px;">hexo插件</a> <a href="/tags/hexo-评论系统-Valine/" style="font-size: 15px;">hexo 评论系统:Valine</a> <a href="/tags/博客评论系统/" style="font-size: 15px;">博客评论系统</a> <a href="/tags/hexo-Valine/" style="font-size: 15px;">hexo Valine</a> <a href="/tags/sublime3/" style="font-size: 15px;">sublime3</a> <a href="/tags/linux-小工具/" style="font-size: 15px;">linux 小工具</a> <a href="/tags/ubuntu-shell/" style="font-size: 15px;">ubuntu shell</a> <a href="/tags/zsh/" style="font-size: 15px;">zsh</a> <a href="/tags/linux-命令工具/" style="font-size: 15px;">linux 命令工具</a> <a href="/tags/ubuntu-elasticsearch/" style="font-size: 15px;">ubuntu elasticsearch</a> <a href="/tags/elasticsearch/" style="font-size: 15px;">elasticsearch</a> <a href="/tags/stash/" style="font-size: 15px;">stash</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/hexo-创建文章、标签、分类的Front-matter/" style="font-size: 15px;">hexo 创建文章、标签、分类的Front-matter</a> <a href="/tags/hexo-创建文章/" style="font-size: 15px;">hexo 创建文章</a> <a href="/tags/hexo-创建标签/" style="font-size: 15px;">hexo 创建标签</a> <a href="/tags/hexo-创建分类/" style="font-size: 15px;">hexo 创建分类</a> <a href="/tags/hexo-Front-matter/" style="font-size: 15px;">hexo Front-matter</a> <a href="/tags/hexo-字数统计插件/" style="font-size: 15px;">hexo 字数统计插件</a> <a href="/tags/博客共享按钮/" style="font-size: 15px;">博客共享按钮</a> <a href="/tags/hexo-不蒜子统计阅读量/" style="font-size: 15px;">hexo 不蒜子统计阅读量</a> <a href="/tags/hexo-sitemap-和-rss/" style="font-size: 15px;">hexo sitemap 和 rss</a> <a href="/tags/sitemap/" style="font-size: 15px;">sitemap</a> <a href="/tags/rss/" style="font-size: 15px;">rss</a> <a href="/tags/docker/" style="font-size: 15px;">docker</a> <a href="/tags/kibana/" style="font-size: 15px;">kibana</a> <a href="/tags/logstash/" style="font-size: 15px;">logstash</a> <a href="/tags/hexo-新建文章规则/" style="font-size: 15px;">hexo 新建文章规则</a> <a href="/tags/新建文章规则/" style="font-size: 15px;">新建文章规则</a> <a href="/tags/新建文章/" style="font-size: 15px;">新建文章</a> <a href="/tags/规则/" style="font-size: 15px;">规则</a> <a href="/tags/shadowsocks-qt5/" style="font-size: 15px;">shadowsocks-qt5</a> <a href="/tags/ubuntu/" style="font-size: 15px;">ubuntu</a> <a href="/tags/dockerCE/" style="font-size: 15px;">dockerCE</a> <a href="/tags/开机启动/" style="font-size: 15px;">开机启动</a> <a href="/tags/gimp/" style="font-size: 15px;">gimp</a> <a href="/tags/netdata/" style="font-size: 15px;">netdata</a> <a href="/tags/安装deepin-terminal/" style="font-size: 15px;">安装deepin terminal</a> <a href="/tags/ubuntu-安装常用小工具/" style="font-size: 15px;">ubuntu 安装常用小工具</a> <a href="/tags/xmind8/" style="font-size: 15px;">xmind8</a> <a href="/tags/Docker测试静态网站/" style="font-size: 15px;">Docker测试静态网站</a> <a href="/tags/Albert/" style="font-size: 15px;">Albert</a> <a href="/tags/Docker镜像和仓库/" style="font-size: 15px;">Docker镜像和仓库</a> <a href="/tags/ubuntu系统环境配置文件的区别/" style="font-size: 15px;">ubuntu系统环境配置文件的区别</a> <a href="/tags/hexo-pdf/" style="font-size: 15px;">hexo pdf</a> <a href="/tags/pdf插件/" style="font-size: 15px;">pdf插件</a> <a href="/tags/快捷方式/" style="font-size: 15px;">快捷方式</a> <a href="/tags/typora/" style="font-size: 15px;">typora</a> <a href="/tags/进入docker方法/" style="font-size: 15px;">进入docker方法</a> <a href="/tags/hexo-版权/" style="font-size: 15px;">hexo 版权</a> <a href="/tags/hexo-打赏/" style="font-size: 15px;">hexo 打赏</a> <a href="/tags/hexo-萌妹子/" style="font-size: 15px;">hexo 萌妹子</a> <a href="/tags/萌宠或萌妹子/" style="font-size: 15px;">萌宠或萌妹子</a> <a href="/tags/hexo-萌宠/" style="font-size: 15px;">hexo 萌宠</a> <a href="/tags/intellij-idea/" style="font-size: 15px;">intellij idea</a> <a href="/tags/构建docker镜像/" style="font-size: 15px;">构建docker镜像</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/搭建个人博客/" style="font-size: 15px;">搭建个人博客</a> <a href="/tags/github/" style="font-size: 15px;">github</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/11/07/进入正在运行的Docker容器的4种方式/">进入正在运行的Docker容器的4种方式</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/07/使用Docker测试静态网站/">使用Docker测试静态网站</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/07/Docker的Dockerfile指令/">Docker的Dockerfile指令</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/07/构建docker镜像/">构建docker镜像</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/07/使用Docker镜像和仓库/">使用Docker镜像和仓库</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/07/Docker入门/">Docker入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/07/ubuntu18-04安装dockerCE/">ubuntu18.04安装dockerCE</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/07/Ubuntu18-04安装sublime3/">Ubuntu18.04安装sublime3</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/22/gitstash使用教程/">gitstash使用教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/10/22/ubuntu-linux-安装配置shadowsocks-qt5客户端/">ubuntu-linux-安装配置shadowsocks-qt5客户端</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="https://github.com/hiekay" title="GitHub" target="_blank">GitHub</a><ul></ul><a href="https://blog.csdn.net/u010820857" title="CSDN" target="_blank">CSDN</a><ul></ul><a href="https://www.jianshu.com/u/29e502b05255" title="简书" target="_blank">简书</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2018 <a href="/." rel="nofollow">hiekay's blog.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=1.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=1.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=1.0.0"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>
