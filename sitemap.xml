@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://hiekay.github.io/categories/index.html</loc>
+    <loc>https://hiekay.github.io/2021/04/01/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</loc>
     
     <lastmod>2021-04-01</lastmod>
     
@@ -10,6 +10,13 @@
   
   <url>
     <loc>https://hiekay.github.io/tags/index.html</loc>
+    
+    <lastmod>2021-04-01</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://hiekay.github.io/categories/index.html</loc>
     
     <lastmod>2021-04-01</lastmod>
     
@@ -38,6 +45,20 @@
   </url>
 
   
+  <url>
+    <loc>https://hiekay.github.io/tags/hexo-github-%E5%8D%9A%E5%AE%A2/</loc>
+    <lastmod>2021-04-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
 
+  
+  <url>
+    <loc>https://hiekay.github.io/categories/hexo/</loc>
+    <lastmod>2021-04-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
   
 </urlset>
