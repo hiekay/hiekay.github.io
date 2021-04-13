@@ -6,7 +6,7 @@
   <link href="https://hiekay.github.io/atom.xml" rel="self"/>
   
   <link href="https://hiekay.github.io/"/>
-  <updated>2021-04-09T02:38:46.102Z</updated>
+  <updated>2021-04-13T05:43:03.188Z</updated>
   <id>https://hiekay.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ChiaNetwork挖矿教程</title>
+    <link href="https://hiekay.github.io/2021/04/13/ChiaNetwork%E6%8C%96%E7%9F%BF%E6%95%99%E7%A8%8B/"/>
+    <id>https://hiekay.github.io/2021/04/13/ChiaNetwork%E6%8C%96%E7%9F%BF%E6%95%99%E7%A8%8B/</id>
+    <published>2021-04-13T05:42:33.000Z</published>
+    <updated>2021-04-13T05:43:03.188Z</updated>
+    
+    <content type="html"><![CDATA[<meta name="referrer" content="no-referrer" /><p>据 Chia Network 官方消息，Chia 区块链现已发布 1.0 版本，主网已在北京时间 3 月 19 日晚上 10 点正式上线。</p><p>这是一个成立于 2017 年的项目，由 BitTorrent 的编写者 Bram Cohen 所创建，旨在创建一个可编程的货币平台，不同于挖矿，Chia 采用的是「耕作（farming）」，是一种利用分布在全球节点上的现有空闲硬盘空间进行区块获取的方式。据了解，Chia Network 从 2017 年成立至今已获得大约 1600 万美元风险投资。</p><h3 id="昔日比特币杀手"><a href="#昔日比特币杀手" class="headerlink" title="昔日比特币杀手"></a>昔日<a href="https://link.jinse.com/s/4gxEl2?coin_keyword=1&coin=bitcoin" title="比特币">比特币</a>杀手</h3><p>与大多数项目相同，Chia 从诞生之日便顶着「比特币杀手」的名号，其空间与时间共识机制（Proof of Space + Proof of Time）曾一度被视为能替代比特币 PoW 的共识机制。因为前者不需要消耗大量的电力资源用于挖矿。</p><p>在 Chia 网络中，挖矿被换成了另一种说法「耕作」，矿工通过硬盘存储空间来验证其区块链。</p><p>2017 年，Chia 获得了 AngelList 联合创始人 Naval Ravikant 领投，A16Z、Greylock、丹华资本、MetaStable Capital、DCM Ventures 等机构 339.5 万美元种子轮融资。</p><p>2018 年，Chia 开启新一轮 500 万美元融资，本轮融资由 Slow Ventures 领投，Collab Crypto、IDEO、Naval Ravikant 跟投。Slow Ventures 执行董事 Jill Carlson 对此表示，风险投资行业对于 Layer 1 区块链项目已经失去了信心，但是 Slow Ventures 仍然期待 Chia 的主网。</p><p>主网的推出，意味着普通用户可以参与其挖矿。</p><h3 id="挖矿教程"><a href="#挖矿教程" class="headerlink" title="挖矿教程"></a>挖矿教程</h3><p>本次挖矿需准备一块大于 332 GB 的固态硬盘（SSD）和一块大于 101 GB 的机械硬盘（HDD）。SSD 用于存放缓存文件，HDD 用于存放最终 plot 文件。</p><p>为进行测试，律动 BlockBeats 准备了一块 500 GB 西数黑盘（SSD）以及一块 4T 希捷酷鱼（HDD）。</p><p>1、下载并安装软件，并创建钱包地址</p><p>软件下载地址：<a href="https://github.com/Chia-Network/chia-blockchain/releases/tag/1.0.0">https://github.com/Chia-Network/chia-blockchain/releases/tag/1.0.0</a></p><p>软件安装完毕之后，点击「CREATE A NEW PRIVATE KEY」创建钱包，并记录下 24 个助记词，该钱包地址也是挖矿地址。</p><p><img src="https://upload-images.jianshu.io/upload_images/5110710-c86820d2eac63fa2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片"></p><p>2、Plot 盘（P 盘）</p><p>依次点击「Plots」、「ADD A PLOT」。</p><p><img src="https://upload-images.jianshu.io/upload_images/5110710-0b3cf4d78d8b5089.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片"></p><p>由于最小缓存文件（约 332 GB）大于最终生成文件（约 101.4GB），因此对于 SSD 容量小于 HDD 容量的用户而言，建议进行多次 P 盘操作。</p><p><img src="https://upload-images.jianshu.io/upload_images/5110710-1745ebca4481fe5a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片"></p><p>实际测试，完成一次 P 盘需要大于 7 个小时。因此如果想进行较为专业的 Chia 挖矿，建议购买较大容量的 SSD 采用多 Plot 文件同时写入的方式用于存放缓存文件。</p><p><img src="https://upload-images.jianshu.io/upload_images/5110710-c17f822a0a633d50.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片"></p><p>3、点击「Farm」查看挖矿状态</p><p><img src="https://upload-images.jianshu.io/upload_images/5110710-1af27a20012de94a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片"></p><p>根据页面数据显示，只进行最低要求参与挖矿（即只使用 101 GB），需要 10 个月才能挖出一个区块。因此，普通用户可接入矿池进行挖矿。同时，律动 BlockBeats 也将在后续写满 4T 硬盘，并测试出块速度，后续测试结果将更新于本文。</p><h3 id="代币分配"><a href="#代币分配" class="headerlink" title="代币分配"></a>代币分配</h3><p>根据官网信息，目前 Chia 网络代币 XCH 分配还存在混乱，中文页面和英文页面显示存在出入。</p><p><img src="https://upload-images.jianshu.io/upload_images/5110710-6fae40946eeb247d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片"></p><p>以英文版为例，XCH 前 3 年每 10 分钟提供 64 枚奖励，3 年减半一次。12 年之后，即从主网启动第 13 年之后（第四次减半），Chia 网络奖励将维持在每 10 分钟 4 枚。</p><h3 id="挖矿体验不如人意"><a href="#挖矿体验不如人意" class="headerlink" title="挖矿体验不如人意"></a>挖矿体验不如人意</h3><p>经过长达两天的测试，Chia 挖矿的体验并不如人意。经过多次测试，P 盘过程并不能暂停，因此需要保证在这几个小时总保持系统的稳定运行。同时，由于缓存文件大于最终 plot 文件，对于普通用户而言，其手中 SSD 容量几乎都小于 HDD 容量，因此无法同时进行多文件 p 盘，导致浪费大量时间。</p><p>根据矿池提供的数据显示，目前 Chia 全网难度约为 132.78 PB，算力约为 132.66 PB，约等于 4.4 万块 4T 硬盘。普通用户参与 Chia 挖矿或可考虑接入矿池。</p><p><img src="https://upload-images.jianshu.io/upload_images/5110710-dcfb933f54b42902.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图片"></p><p>矿池数据显示，目前每 PB 硬盘的日均产出为 57.68 XCH，如 4TB 硬盘按照 550 元计算，相当于 14 万元的硬盘每日产出40 XCH。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot; /&gt;
+
+&lt;p&gt;据 Chia Network 官方消息，Chia 区块链现已发布 1.0 版本，主网已在北京时间 3 月 19 日晚上 10 点正式上线。&lt;/p&gt;
+&lt;p&gt;这是一个成立于 2017</summary>
+      
+    
+    
+    
+    <category term="数字货币" scheme="https://hiekay.github.io/categories/%E6%95%B0%E5%AD%97%E8%B4%A7%E5%B8%81/"/>
+    
+    
+    <category term="数字货币" scheme="https://hiekay.github.io/tags/%E6%95%B0%E5%AD%97%E8%B4%A7%E5%B8%81/"/>
+    
+  </entry>
   
   <entry>
     <title>Hexo搭建的个人博客配置评论系统：Valine</title>
